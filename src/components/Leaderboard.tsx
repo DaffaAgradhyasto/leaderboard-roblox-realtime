@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { GameCard, GameCardSkeleton } from './GameCard';
 import { CategoryTabs, CategoryDescription } from './CategoryTabs';
 import { useLeaderboard } from './useLeaderboard';
@@ -10,24 +10,22 @@ export function Leaderboard() {
   const [category, setCategory] = useState<ChartCategory>('top-playing-now');
   const [countdown, setCountdown] = useState(60);
   const { data, loading, error, lastUpdated, refresh } = useLeaderboard(category);
+  const countdownRef = useRef(60);
 
   // Countdown timer for next update
   useEffect(() => {
+    // Reset countdown ref when dependencies change
+    countdownRef.current = 60;
+    
     const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          return 60;
-        }
-        return prev - 1;
-      });
+      countdownRef.current -= 1;
+      if (countdownRef.current <= 0) {
+        countdownRef.current = 60;
+      }
+      setCountdown(countdownRef.current);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
-
-  // Reset countdown on category change
-  useEffect(() => {
-    setCountdown(60);
   }, [category, lastUpdated]);
 
   const formatTime = (date: Date | null): string => {
