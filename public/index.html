@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Leaderboard Real-time</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Roblox Leaderboard Real-time</h1>
+            <p class="subtitle">Papan Peringkat Game Roblox yang Sedang Trending</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="trending">
+                🔥 Trending Games
+            </button>
+            <button class="tab-button" data-tab="top-playing">
+                👥 Top Playing Now
+            </button>
+        </nav>
+
+        <div class="info-bar">
+            <div class="update-info">
+                <span id="lastUpdate">Memuat data...</span>
+                <button id="refreshBtn" class="refresh-btn">🔄 Refresh</button>
+            </div>
+            <div class="auto-refresh">
+                <label>
+                    <input type="checkbox" id="autoRefresh" checked>
+                    Auto-refresh (30 detik)
+                </label>
+            </div>
+        </div>
+
+        <div class="tab-content active" id="trending">
+            <div class="loading" id="trendingLoading">
+                <div class="spinner"></div>
+                <p>Memuat data trending games...</p>
+            </div>
+            <div class="games-grid" id="trendingGames"></div>
+        </div>
+
+        <div class="tab-content" id="top-playing">
+            <div class="loading" id="topPlayingLoading">
+                <div class="spinner"></div>
+                <p>Memuat data top playing games...</p>
+            </div>
+            <div class="games-grid" id="topPlayingGames"></div>
+        </div>
+
+        <footer>
+            <p>Data diambil dari Roblox API secara real-time</p>
+            <p>© 2024 Roblox Leaderboard Real-time</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
